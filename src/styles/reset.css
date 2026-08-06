@@ -1,0 +1,68 @@
+/* Remove Default Browser Styles */
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Smooth Scrolling */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Body */
+
+body {
+    min-height: 100vh;
+    line-height: 1.5;
+}
+
+/* Images */
+
+img,
+picture {
+    display: block;
+    max-width: 100%;
+}
+
+/* Forms */
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* Links */
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Lists */
+
+ul,
+ol {
+    list-style: none;
+}
+
+/* Buttons */
+
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+/* Tables */
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}

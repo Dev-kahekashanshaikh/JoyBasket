@@ -1,0 +1,27 @@
+body {
+    font-family: var(--font-family);
+    background-color: var(--white);
+    color: var(--black);
+}
+
+.container {
+    width: min(90%, 1280px);
+    margin-inline: auto;
+}
+
+section {
+    padding: 4rem 0;
+}
+
+button {
+    transition: var(--transition);
+}
+
+img {
+    user-select: none;
+}
+
+::selection {
+    background-color: var(--primary-color);
+    color: var(--white);
+}

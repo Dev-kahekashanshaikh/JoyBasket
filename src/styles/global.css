@@ -25,3 +25,35 @@ img {
     background-color: var(--primary-color);
     color: var(--white);
 }
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 44px;
+    padding: 0.7rem 1.25rem;
+
+    border: none;
+    border-radius: var(--radius-sm);
+
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semibold);
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+.btn-primary {
+    color: var(--white);
+    background-color: var(--primary-color);
+}

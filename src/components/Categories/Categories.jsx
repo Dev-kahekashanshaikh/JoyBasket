@@ -2,9 +2,9 @@ import { useMemo } from "react";
 
 import CategoryCard from "../CategoryCard/CategoryCard";
 
-import "./Categories.css";
+// import "./Categories.css";
 
-const Categories = ({ products = [], onCategorySelect }) => {
+const Categories = ({ products = [], onCategorySelect , itemNoSlicestart, itemNoSliceEnd}) => {
 
     const categories = useMemo(() => {
 
@@ -64,7 +64,7 @@ const Categories = ({ products = [], onCategorySelect }) => {
 
                 <div className="categories-grid">
 
-                    {categories.slice(0, 20).map((category) => (
+                    {categories.slice(itemNoSlicestart, itemNoSliceEnd).map((category) => (
 
                         <CategoryCard
                             key={category.id}

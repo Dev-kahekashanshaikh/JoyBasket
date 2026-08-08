@@ -8,6 +8,7 @@ import Cart from "../pages/Cart/Cart";
 import Wishlist from "../pages/Wishlist/Wishlist";
 import About from "../pages/About/About";
 import Contact from "../pages/Contact/Contact";
+import ProductCategory from "../pages/ProductCategory/ProductCategory";
 
 const AppRoutes = () => {
     return (
@@ -18,6 +19,10 @@ const AppRoutes = () => {
                 <Route path="/" element={<Home />} />
 
                 <Route path="/products" element={<Products />} />
+                <Route
+                    path="/products/category/:category"
+                    element={<ProductCategory />}
+                />
 
                 <Route path="/cart" element={<Cart />} />
 
@@ -26,6 +31,8 @@ const AppRoutes = () => {
                 <Route path="/about" element={<About />} />
 
                 <Route path="/contact" element={<Contact />} />
+
+
 
             </Route>
 

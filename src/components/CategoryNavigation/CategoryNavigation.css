@@ -1,0 +1,117 @@
+/* =========================================
+   PRODUCT NAVIGATION
+========================================= */
+
+.product-navigation {
+    width: 100%;
+
+    padding: 0.8rem 0;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #eeeeee;
+
+    position: relative;
+
+    z-index: 10;
+}
+
+
+/* =========================================
+   CATEGORY LIST
+========================================= */
+
+.product-navigation-list {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 0.4rem;
+
+    padding: 0 1.5rem;
+
+    overflow-x: auto;
+
+    white-space: nowrap;
+
+    scrollbar-width: none;
+}
+
+.product-navigation-list::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* =========================================
+   CATEGORY BUTTON
+========================================= */
+
+.product-navigation-list button {
+    flex-shrink: 0;
+
+    padding: 0.65rem 1rem;
+
+    border: none;
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: #444;
+
+    font-size: 0.95rem;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+/* =========================================
+   HOVER
+========================================= */
+
+.product-navigation-list button:hover {
+    background: rgba(40, 201, 117, 0.1);
+
+    color: var(--primary-color);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   ACTIVE-LIKE EFFECT
+========================================= */
+
+.product-navigation-list button:active {
+    transform: scale(0.97);
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .product-navigation {
+        padding: 0.6rem 0;
+    }
+
+    .product-navigation-list {
+        gap: 0.25rem;
+
+        padding: 0 1rem;
+    }
+
+    .product-navigation-list button {
+        padding: 0.55rem 0.8rem;
+
+        font-size: 0.85rem;
+    }
+}

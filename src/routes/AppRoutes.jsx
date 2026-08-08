@@ -23,7 +23,6 @@ const AppRoutes = () => {
                     path="/products/category/:category"
                     element={<ProductCategory />}
                 />
-
                 <Route path="/cart" element={<Cart />} />
 
                 <Route path="/wishlist" element={<Wishlist />} />

@@ -1,12 +1,19 @@
 import { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
+
 import "./CategoryBanners.css";
 
 const CategoryBanners = ({ products = [] }) => {
+
+    const navigate = useNavigate();
+
     const categoryProducts = useMemo(() => {
+
         // Group products by category
         const groupedCategories = {};
 
         products.forEach((product) => {
+
             if (!groupedCategories[product.category]) {
                 groupedCategories[product.category] = [];
             }
@@ -17,61 +24,88 @@ const CategoryBanners = ({ products = [] }) => {
         // Get all different categories
         const categories = Object.keys(groupedCategories);
 
-        // Shuffle categories so different categories can appear
-        // when the page/component opens
-        // const shuffledCategories = [...categories].sort(
-        //     () => Math.random() - 0.5
-        // );
-        const shuffledCategories=[categories[2],categories[12],categories[19]]
+        // Pick 3 categories for now
+        const selectedCategories = [
+            categories[2],
+            categories[12],
+            categories[19],
+        ];
 
-        // Pick 3 different categories
-        return shuffledCategories.map((category) => {
-            const categoryProducts = groupedCategories[category];
+        // Create banner product for each category
+        return selectedCategories
+            .filter(Boolean)
+            .map((category) => {
 
-            // Pick one product from that category
-            const product =
-                categoryProducts[
-                    Math.floor(Math.random() * categoryProducts.length)
-                ];
+                const categoryProducts =
+                    groupedCategories[category];
 
-            return product;
-        });
+                // Pick one product from category
+                const product =
+                    categoryProducts[
+                        Math.floor(
+                            Math.random() *
+                            categoryProducts.length
+                        )
+                    ];
+
+                return product;
+            });
+
     }, [products]);
+
+
+    const handleCategoryClick = (category) => {
+
+        console.log("Selected category:", category);
+
+        navigate(
+            `products/category/${encodeURIComponent(category)}`
+        );
+    };
+
 
     return (
         <section className="category-banners">
+
             <div className="container">
+
                 <h2>Most Popular Categories</h2>
 
                 <div className="category-banners-grid">
+
                     {categoryProducts.map((product) => (
+
                         <div
                             className="category-banner"
                             key={product.id}
-                            onClick={() => {
-                                console.log(
-                                    "Selected category:",
+                            onClick={() =>
+                                handleCategoryClick(
                                     product.category
-                                );
-                            }}
+                                )
+                            }
                         >
+
                             <img
                                 src={product.thumbnail}
                                 alt={product.title}
                             />
 
                             <div className="category-banner-content">
+
                                 <span className="category-name">
                                     {product.category}
                                 </span>
 
-                                <h3>{product.title}</h3>
+                                <h3>
+                                    {product.title}
+                                </h3>
 
                                 <p className="product-brand">
                                     {product.brand}
                                 </p>
 
                                 <div className="category-banner-bottom">
+
                                     <strong>
                                         Starting ₹
                                         {Math.round(
@@ -80,15 +114,24 @@ const CategoryBanners = ({ products = [] }) => {
                                     </strong>
 
                                     <span className="discount">
-                                        {Math.round(product.discountPercentage)}
+                                        {Math.round(
+                                            product.discountPercentage
+                                        )}
                                         % OFF
                                     </span>
+
                                 </div>
+
                             </div>
+
                         </div>
+
                     ))}
+
                 </div>
+
             </div>
+
         </section>
     );
 };

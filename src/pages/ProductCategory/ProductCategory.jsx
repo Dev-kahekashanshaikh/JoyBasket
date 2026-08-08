@@ -1,8 +1,12 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useParams } from "react-router-dom";
+import ProductNavigation from "../../components/CategoryNavigation/ProductNavigation";
+import ProductCategoryHeader from "../../components/ProductCategoryHeader/ProductCategoryHeader";
+import CategoryFilters from "../../components/CategoryFilters/CategoryFilters";
+import ProductGrid from "../../components/ProductGrid/ProductGrid";
 
-import ProductCard from "../../components/ProductCard/ProductCard";
 import useProducts from "../../hooks/useProducts";
+import useProductFilters from "../../hooks/useProductFilters";
 
 import "./ProductCategory.css";
 
@@ -27,17 +31,6 @@ const ProductCategory = () => {
 
 
     // =========================================
-    // Filter states
-    // =========================================
-
-    const [selectedTitle, setSelectedTitle] = useState("");
-    const [selectedBrand, setSelectedBrand] = useState("");
-    const [selectedPrice, setSelectedPrice] = useState("");
-    const [selectedRating, setSelectedRating] = useState("");
-    const [selectedDiscount, setSelectedDiscount] = useState("");
-
-
-    // =========================================
     // Products belonging to this category
     // =========================================
 
@@ -53,146 +46,30 @@ const ProductCategory = () => {
 
 
     // =========================================
-    // Available product titles
+    // Product filters
     // =========================================
 
-    const titles = useMemo(() => {
+    const {
+        titles,
+        brands,
 
-        return [
-            ...new Set(
-                categoryProducts
-                    .map((product) => product.title)
-                    .filter(Boolean)
-            ),
-        ].sort();
-
-    }, [categoryProducts]);
-
-
-    // =========================================
-    // Available brands
-    // =========================================
-
-    const brands = useMemo(() => {
-
-        return [
-            ...new Set(
-                categoryProducts
-                    .map((product) => product.brand)
-                    .filter(Boolean)
-            ),
-        ].sort();
-
-    }, [categoryProducts]);
-
-
-    // =========================================
-    // Apply filters
-    // =========================================
-
-    const filteredProducts = useMemo(() => {
-
-        return categoryProducts.filter((product) => {
-
-            // Product title
-            if (
-                selectedTitle &&
-                product.title !== selectedTitle
-            ) {
-                return false;
-            }
-
-
-            // Brand
-            if (
-                selectedBrand &&
-                product.brand !== selectedBrand
-            ) {
-                return false;
-            }
-
-
-            // Price
-            if (selectedPrice) {
-
-                const price = product.price;
-
-                if (
-                    selectedPrice === "under-50" &&
-                    price >= 50
-                ) {
-                    return false;
-                }
-
-                if (
-                    selectedPrice === "50-100" &&
-                    (price < 50 || price > 100)
-                ) {
-                    return false;
-                }
-
-                if (
-                    selectedPrice === "100-500" &&
-                    (price < 100 || price > 500)
-                ) {
-                    return false;
-                }
-
-                if (
-                    selectedPrice === "above-500" &&
-                    price <= 500
-                ) {
-                    return false;
-                }
-            }
-
-
-            // Rating
-            if (
-                selectedRating &&
-                product.rating < Number(selectedRating)
-            ) {
-                return false;
-            }
-
-
-            // Discount
-            if (
-                selectedDiscount &&
-                product.discountPercentage <
-                Number(selectedDiscount)
-            ) {
-                return false;
-            }
-
-
-            return true;
-
-        });
-
-    }, [
-        categoryProducts,
         selectedTitle,
         selectedBrand,
         selectedPrice,
         selectedRating,
         selectedDiscount,
-    ]);
 
+        setSelectedTitle,
+        setSelectedBrand,
+        setSelectedPrice,
+        setSelectedRating,
+        setSelectedDiscount,
 
-    // =========================================
-    // Clear filters
-    // =========================================
+        filteredProducts,
 
-    const clearFilters = () => {
+        clearFilters,
 
-        setSelectedTitle("");
-        setSelectedBrand("");
-        setSelectedPrice("");
-        setSelectedRating("");
-        setSelectedDiscount("");
-
-    };
+    } = useProductFilters(categoryProducts);
 
 
     // =========================================
@@ -248,242 +125,44 @@ const ProductCategory = () => {
 
             <div className="container">
 
-                {/* =================================
-                    Header
-                ================================= */}
+                {/* Header */}
 
                 <div className="product-category-header">
+                <ProductNavigation
+    products={products}
+/>
 
-                    <span className="products-eyebrow">
-                        JoyBasket Store
-                    </span>
-
-                    <h1>
-                        {category}
-                    </h1>
-
-                    <p>
-                        Discover the best products
-                        available in this category.
-                    </p>
+<ProductCategoryHeader
+    category={category}
+    productCount={categoryProducts.length}
+/>
 
                 </div>
 
 
-                {/* =================================
-                    Filters
-                ================================= */}
+                {/* Filters */}
 
-                <div className="category-filters">
+                <CategoryFilters
+                    titles={titles}
+                    brands={brands}
 
-                    {/* Product */}
+                    selectedTitle={selectedTitle}
+                    selectedBrand={selectedBrand}
+                    selectedPrice={selectedPrice}
+                    selectedRating={selectedRating}
+                    selectedDiscount={selectedDiscount}
 
-                    <div className="filter-group">
+                    setSelectedTitle={setSelectedTitle}
+                    setSelectedBrand={setSelectedBrand}
+                    setSelectedPrice={setSelectedPrice}
+                    setSelectedRating={setSelectedRating}
+                    setSelectedDiscount={setSelectedDiscount}
 
-                        <label>
-                            Product
-                        </label>
-
-                        <select
-                            value={selectedTitle}
-                            onChange={(event) =>
-                                setSelectedTitle(
-                                    event.target.value
-                                )
-                            }
-                        >
-
-                            <option value="">
-                                All Products
-                            </option>
-
-                            {titles.map((title) => (
-
-                                <option
-                                    key={title}
-                                    value={title}
-                                >
-                                    {title}
-                                </option>
-
-                            ))}
-
-                        </select>
-
-                    </div>
+                    clearFilters={clearFilters}
+                />
 
 
-                    {/* Brand */}
-
-                    <div className="filter-group">
-
-                        <label>
-                            Brand
-                        </label>
-
-                        <select
-                            value={selectedBrand}
-                            onChange={(event) =>
-                                setSelectedBrand(
-                                    event.target.value
-                                )
-                            }
-                        >
-
-                            <option value="">
-                                All Brands
-                            </option>
-
-                            {brands.map((brand) => (
-
-                                <option
-                                    key={brand}
-                                    value={brand}
-                                >
-                                    {brand}
-                                </option>
-
-                            ))}
-
-                        </select>
-
-                    </div>
-
-
-                    {/* Price */}
-
-                    <div className="filter-group">
-
-                        <label>
-                            Price
-                        </label>
-
-                        <select
-                            value={selectedPrice}
-                            onChange={(event) =>
-                                setSelectedPrice(
-                                    event.target.value
-                                )
-                            }
-                        >
-
-                            <option value="">
-                                All Prices
-                            </option>
-
-                            <option value="under-50">
-                                Under $50
-                            </option>
-
-                            <option value="50-100">
-                                $50 - $100
-                            </option>
-
-                            <option value="100-500">
-                                $100 - $500
-                            </option>
-
-                            <option value="above-500">
-                                Above $500
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    {/* Rating */}
-
-                    <div className="filter-group">
-
-                        <label>
-                            Rating
-                        </label>
-
-                        <select
-                            value={selectedRating}
-                            onChange={(event) =>
-                                setSelectedRating(
-                                    event.target.value
-                                )
-                            }
-                        >
-
-                            <option value="">
-                                All Ratings
-                            </option>
-
-                            <option value="4">
-                                4★ & above
-                            </option>
-
-                            <option value="3">
-                                3★ & above
-                            </option>
-
-                            <option value="2">
-                                2★ & above
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    {/* Discount */}
-
-                    <div className="filter-group">
-
-                        <label>
-                            Discount
-                        </label>
-
-                        <select
-                            value={selectedDiscount}
-                            onChange={(event) =>
-                                setSelectedDiscount(
-                                    event.target.value
-                                )
-                            }
-                        >
-
-                            <option value="">
-                                All Discounts
-                            </option>
-
-                            <option value="10">
-                                10% & above
-                            </option>
-
-                            <option value="20">
-                                20% & above
-                            </option>
-
-                            <option value="30">
-                                30% & above
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    {/* Clear */}
-
-                    <button
-                        type="button"
-                        className="clear-filters"
-                        onClick={clearFilters}
-                    >
-                        Clear Filters
-                    </button>
-
-                </div>
-
-
-                {/* =================================
-                    Results
-                ================================= */}
+                {/* Results */}
 
                 <div className="category-results-info">
 
@@ -502,36 +181,11 @@ const ProductCategory = () => {
                 </div>
 
 
-                {/* =================================
-                    Product Grid
-                ================================= */}
+                {/* Product Grid */}
 
-                {filteredProducts.length > 0 ? (
-
-<div className="category-products-grid">
-                        {filteredProducts.map(
-                            (product) => (
-                                <ProductCard
-                                    key={product.id}
-                                    product={product}
-                                />
-                            )
-                        )}
-
-                    </div>
-
-                ) : (
-
-                    <div className="no-products">
-
-                        <p>
-                            No products found for
-                            this category.
-                        </p>
-
-                    </div>
-
-                )}
+                <ProductGrid
+                    products={filteredProducts}
+                />
 
             </div>
 

@@ -1,10 +1,18 @@
 import { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 
 import CategoryCard from "../CategoryCard/CategoryCard";
 
-// import "./Categories.css";
+const Categories = ({
+    products = [],
+    itemNoSlicestart,
+    itemNoSliceEnd,
+}) => {
+// to navigate the url by clicking on products page
+    const navigate = useNavigate();
 
-const Categories = ({ products = [], onCategorySelect , itemNoSlicestart, itemNoSliceEnd}) => {
+
+    //To group the all available category only from api no category will repeat
 
     const categories = useMemo(() => {
 
@@ -15,13 +23,11 @@ const Categories = ({ products = [], onCategorySelect , itemNoSlicestart, itemNo
             if (!product.category) return;
 
             if (!categoryMap.has(product.category)) {
-
                 categoryMap.set(product.category, {
                     id: product.category,
                     title: product.category,
                     image: product.thumbnail,
                 });
-
             }
 
         });
@@ -30,15 +36,6 @@ const Categories = ({ products = [], onCategorySelect , itemNoSlicestart, itemNo
 
     }, [products]);
 
-    const handleCategoryClick = (category) => {
-
-        console.log("Selected category:", category);
-
-        if (onCategorySelect) {
-            onCategorySelect(category);
-        }
-
-    };
 
     return (
         <section className="categories">
@@ -61,20 +58,20 @@ const Categories = ({ products = [], onCategorySelect , itemNoSlicestart, itemNo
                     </p>
 
                 </div>
-
+{/* mapping the array of category only with image and title */}
                 <div className="categories-grid">
 
-                    {categories.slice(itemNoSlicestart, itemNoSliceEnd).map((category) => (
+                    {categories
+                        .slice(itemNoSlicestart, itemNoSliceEnd)
+                        .map((category) => (
 
-                        <CategoryCard
-                            key={category.id}
-                            category={category}
-                            onClick={() =>
-                                handleCategoryClick(category.title)
-                            }
-                        />
+                            <CategoryCard
+                                key={category.id}
+                                category={category}
+                                onClick={() => navigate("/products")}
+                            />
 
-                    ))}
+                        ))}
 
                 </div>
 

@@ -23,8 +23,12 @@ const Products = () => {
     const navigate = useNavigate();
 
     const handleCategoryClick = (category) => {
-        navigate(`/products/category/${category}`);
+        // navigate(`/products/category/${category}`);
+            navigate(
+    `/products/category/${encodeURIComponent(category)}`
+);
     };
+
 
 
     // =========================================

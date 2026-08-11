@@ -1,6 +1,11 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
 
+import { useState } from "react";
+import {
+    NavLink,
+    useNavigate,
+    useLocation,
+} from "react-router-dom";
+import logo from "../../assets/icons/joybasketLogo.png"
 import {
     HiOutlineMagnifyingGlass,
     HiOutlineShoppingCart,
@@ -10,127 +15,255 @@ import {
     HiOutlineXMark,
 } from "react-icons/hi2";
 
+import { useCart } from "../../context/CartContext";
+import { useWishlist } from "../../context/WishlistContext";
+
 import "./Navbar.css";
 
+
 const Navbar = () => {
+
+    // =========================================
+    // STATES
+    // =========================================
+
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [searchText, setSearchText] = useState("");
+
+
+    // =========================================
+    // ROUTER
+    // =========================================
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+
+    // =========================================
+    // CART
+    // =========================================
+
+    const {
+        totalItems,
+    } = useCart();
+
+
+    // =========================================
+    // WISHLIST
+    // =========================================
+
+    const {
+        wishlistItems,
+    } = useWishlist();
+
+
+    // =========================================
+    // CLOSE MOBILE MENU
+    // =========================================
 
     const closeMenu = () => {
         setIsMenuOpen(false);
     };
 
+
+    // =========================================
+    // SEARCH
+    // =========================================
+
+    // const handleSearch = (event) => {
+
+    //     event.preventDefault();
+
+    //     const search = searchText.trim();
+
+    //     console.log("Search entered:", search);
+
+
+    //     // Don't search empty text
+    //     if (!search) {
+    //         return;
+    //     }
+
+
+    //     // Navigate to products page
+    //     navigate(
+    //         `/products?search=${encodeURIComponent(search)}`
+    //     );
+
+
+    //     // Clear search input
+    //     setSearchText("");
+
+
+    //     // Close mobile menu
+    //     closeMenu();
+
+    // };
+
+    const handleSearch = (event) => {
+
+    event.preventDefault();
+
+    const search = searchText.trim();
+
+    if (!search) {
+        return;
+    }
+
+    console.log("Searching product:", search);
+
+    navigate(`/products?search=${encodeURIComponent(search)}`);
+
+    setSearchText("");
+    closeMenu();
+
+};
+
+
+    // =========================================
+    // CLEAR SEARCH WHEN LEAVING PRODUCTS
+    // =========================================
+
+    const handleLogoClick = () => {
+
+        setSearchText("");
+
+        closeMenu();
+
+    };
+
+
+    // =========================================
+    // RETURN
+    // =========================================
+
     return (
+
         <header className="header">
+
             <div className="container">
 
-                <nav className="navbar" aria-label="Main navigation">
+                <nav
+                    className="navbar"
+                    aria-label="Main navigation"
+                >
 
-                    {/* Logo */}
+                    {/* =================================
+                        LOGO
+                    ================================= */}
+
                     <div className="logo">
+
                         <NavLink
                             to="/"
                             aria-label="JoyBasket Home"
-                            onClick={closeMenu}
+                            onClick={handleLogoClick}
                         >
-                            JoyBasket
+                            <img src={logo} alt="JoyBasket"   />
                         </NavLink>
+
                     </div>
 
-                    {/* Navigation */}
-                    <ul
-                        className={`nav-links ${
-                            isMenuOpen ? "nav-links-open" : ""
-                        }`}
+
+                    {/* =================================
+                        SEARCH
+                    ================================= */}
+
+                    <form
+                        className="navbar-search"
+                        onSubmit={handleSearch}
                     >
-                        <li>
-                            <NavLink
-                                to="/"
-                                end
-                                className={({ isActive }) =>
-                                    isActive
-                                        ? "nav-link active"
-                                        : "nav-link"
-                                }
-                                onClick={closeMenu}
-                            >
-                                Home
-                            </NavLink>
-                        </li>
 
-                        <li>
-                            <NavLink
-                                to="/products"
-                                className={({ isActive }) =>
-                                    isActive
-                                        ? "nav-link active"
-                                        : "nav-link"
-                                }
-                                onClick={closeMenu}
-                            >
-                                Products
-                            </NavLink>
-                        </li>
+                        <HiOutlineMagnifyingGlass
+                            className="search-icon"
+                        />
 
-                        <li>
-                            <NavLink
-                                to="/about"
-                                className={({ isActive }) =>
-                                    isActive
-                                        ? "nav-link active"
-                                        : "nav-link"
-                                }
-                                onClick={closeMenu}
-                            >
-                                About
-                            </NavLink>
-                        </li>
+                        <input
+                            type="search"
+                            placeholder="Search products..."
+                            value={searchText}
+                            onChange={(event) =>
+                                setSearchText(
+                                    event.target.value
+                                )
+                            }
+                            aria-label="Search products"
+                        />
 
-                        <li>
-                            <NavLink
-                                to="/contact"
-                                className={({ isActive }) =>
-                                    isActive
-                                        ? "nav-link active"
-                                        : "nav-link"
-                                }
-                                onClick={closeMenu}
-                            >
-                                Contact
-                            </NavLink>
-                        </li>
-                    </ul>
 
-                    {/* Actions */}
-                    <div className="nav-actions">
+                        {/* Optional search button */}
 
                         <button
-                            type="button"
-                            className="nav-btn search-btn"
-                            aria-label="Search products"
-                            title="Search"
+                            type="submit"
+                            className="search-submit"
+                            aria-label="Search"
                         >
                             <HiOutlineMagnifyingGlass />
                         </button>
 
+                    </form>
+
+
+                    {/* =================================
+                        ACTIONS
+                    ================================= */}
+
+                    <div className="nav-actions">
+
+
+                        {/* =================================
+                            WISHLIST
+                        ================================= */}
+
                         <NavLink
                             to="/wishlist"
-                            className="nav-btn"
+                            className="nav-btn nav-count-btn"
                             aria-label="Wishlist"
                             title="Wishlist"
                             onClick={closeMenu}
                         >
+
                             <HiOutlineHeart />
+
+                            {wishlistItems.length > 0 && (
+
+                                <span className="nav-count">
+                                    {wishlistItems.length}
+                                </span>
+
+                            )}
+
                         </NavLink>
+
+
+                        {/* =================================
+                            CART
+                        ================================= */}
 
                         <NavLink
                             to="/cart"
-                            className="nav-btn"
+                            className="nav-btn nav-count-btn"
                             aria-label="Shopping cart"
                             title="Cart"
                             onClick={closeMenu}
                         >
+
                             <HiOutlineShoppingCart />
+
+                            {totalItems > 0 && (
+
+                                <span className="nav-count">
+                                    {totalItems}
+                                </span>
+
+                            )}
+
                         </NavLink>
+
+
+                        {/* =================================
+                            ACCOUNT
+                        ================================= */}
 
                         <button
                             type="button"
@@ -138,10 +271,16 @@ const Navbar = () => {
                             aria-label="Account"
                             title="Account"
                         >
+
                             <HiOutlineUser />
+
                         </button>
 
-                        {/* Mobile Menu Button */}
+
+                        {/* =================================
+                            MOBILE MENU
+                        ================================= */}
+
                         <button
                             type="button"
                             className="menu-toggle"
@@ -152,23 +291,76 @@ const Navbar = () => {
                             }
                             aria-expanded={isMenuOpen}
                             onClick={() =>
-                                setIsMenuOpen((prev) => !prev)
+                                setIsMenuOpen(
+                                    (previous) =>
+                                        !previous
+                                )
                             }
                         >
+
                             {isMenuOpen ? (
                                 <HiOutlineXMark />
                             ) : (
                                 <HiOutlineBars3 />
                             )}
+
                         </button>
 
                     </div>
 
                 </nav>
 
+
+                {/* =================================
+                    MOBILE MENU
+                ================================= */}
+
+                {isMenuOpen && (
+
+                    <div className="mobile-menu">
+
+                        <NavLink
+                            to="/"
+                            onClick={closeMenu}
+                        >
+                            Home
+                        </NavLink>
+
+
+                        <NavLink
+                            to="/products"
+                            onClick={closeMenu}
+                        >
+                            Products
+                        </NavLink>
+
+
+                        <NavLink
+                            to="/about"
+                            onClick={closeMenu}
+                        >
+                            About
+                        </NavLink>
+
+
+                        <NavLink
+                            to="/contact"
+                            onClick={closeMenu}
+                        >
+                            Contact
+                        </NavLink>
+
+                    </div>
+
+                )}
+
             </div>
+
         </header>
+
     );
+
 };
+
 
 export default Navbar;

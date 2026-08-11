@@ -1,0 +1,691 @@
+/* =========================================
+   PRODUCT CATEGORY HERO
+========================================= */
+
+.product-category-hero {
+    position: relative;
+
+    width: 100%;
+    min-height: 390px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 3rem;
+
+    margin-bottom: 2.5rem;
+    padding: 3.5rem 4rem;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            120deg,
+            #ffffff 0%,
+            #fafafa 55%,
+            #f6f6f6 100%
+        );
+
+    border: 1px solid #e8e8e8;
+    border-radius: 24px;
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.07);
+}
+
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.product-category-hero-content {
+    position: relative;
+
+    z-index: 3;
+
+    width: 58%;
+    max-width: 700px;
+}
+
+
+/* =========================================
+   EYEBROW
+========================================= */
+
+.products-eyebrow {
+    display: inline-flex;
+    align-items: center;
+
+    margin-bottom: 0.8rem;
+
+    color: #777;
+
+    font-size: 0.78rem;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+
+/* =========================================
+   CATEGORY TITLE
+========================================= */
+
+.product-category-hero h1 {
+    margin: 0 0 1rem;
+
+    color: #171717;
+
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 800;
+
+    line-height: 1;
+
+    text-transform: capitalize;
+
+    letter-spacing: -1.5px;
+}
+
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.category-hero-description {
+    max-width: 580px;
+
+    margin: 0 0 1.5rem;
+
+    color: #666;
+
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   SALE BADGE
+========================================= */
+
+.season-sale-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+
+    margin-bottom: 1.5rem;
+
+    padding: 0.65rem 1rem;
+
+    background: #fff;
+
+    border: 1px solid #e5e5e5;
+    border-radius: 50px;
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.season-sale-badge span {
+    color: #777;
+
+    font-size: 0.72rem;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+.season-sale-badge strong {
+    padding: 0.35rem 0.7rem;
+
+    color: #ffffff;
+    background: #111;
+
+    border-radius: 20px;
+
+    font-size: 0.78rem;
+}
+
+
+/* =========================================
+   ACTIONS
+========================================= */
+
+.category-hero-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 1.5rem;
+
+    margin-bottom: 1.8rem;
+}
+
+
+/* =========================================
+   SHOP BUTTON
+========================================= */
+
+.hero-shop-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 0.7rem;
+
+    padding: 0.9rem 1.5rem;
+
+    color: #ffffff;
+    background: #111;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 0.95rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+.hero-shop-btn span {
+    font-size: 1.2rem;
+
+    transition: transform 0.25s ease;
+}
+
+.hero-shop-btn:hover {
+    transform: translateY(-2px);
+
+    background: #222;
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+.hero-shop-btn:hover span {
+    transform: translateX(4px);
+}
+
+
+/* =========================================
+   PRODUCT COUNT
+========================================= */
+
+.category-product-count {
+    display: flex;
+    flex-direction: column;
+
+    gap: 0.15rem;
+}
+
+.category-product-count strong {
+    color: #111;
+
+    font-size: 1.3rem;
+}
+
+.category-product-count small {
+    color: #888;
+
+    font-size: 0.75rem;
+}
+
+
+/* =========================================
+   BRANDS
+========================================= */
+
+.hero-brand-section {
+    display: flex;
+    align-items: center;
+
+    gap: 1.2rem;
+}
+
+.hero-brand-section > span {
+    color: #999;
+
+    font-size: 0.75rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.hero-brands {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 0.6rem;
+}
+
+.hero-brands strong {
+    padding: 0.35rem 0.7rem;
+
+    color: #555;
+
+    background: #ffffff;
+
+    border: 1px solid #e6e6e6;
+    border-radius: 6px;
+
+    font-size: 0.72rem;
+
+    transition: all 0.2s ease;
+}
+
+.hero-brands strong:hover {
+    color: #111;
+
+    border-color: #bbb;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   RIGHT VISUAL
+========================================= */
+
+.product-category-hero-visual {
+    position: relative;
+
+    width: 38%;
+    min-height: 300px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================================
+   PRODUCT VISUAL
+========================================= */
+
+.hero-product-visual {
+    position: relative;
+
+    width: 250px;
+    height: 250px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #ffffff 0%,
+            #f0f0f0 65%,
+            #e5e5e5 100%
+        );
+
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, 0.12);
+}
+
+
+/* Decorative inner circle */
+
+.hero-product-circle {
+    position: absolute;
+
+    width: 190px;
+    height: 190px;
+
+    border: 1px dashed #ccc;
+
+    border-radius: 50%;
+}
+
+
+/* Product text */
+
+.hero-product-content {
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+}
+
+.hero-product-content span {
+    margin-bottom: 0.5rem;
+
+    padding: 0.3rem 0.6rem;
+
+    color: #ffffff;
+    background: #111;
+
+    border-radius: 4px;
+
+    font-size: 0.65rem;
+    font-weight: 700;
+}
+
+.hero-product-content strong {
+    color: #222;
+
+    font-size: 1.6rem;
+
+    text-transform: capitalize;
+}
+
+.hero-product-content small {
+    margin-top: 0.3rem;
+
+    color: #888;
+
+    font-size: 0.7rem;
+}
+
+
+/* =========================================
+   SALE CIRCLE
+========================================= */
+
+.hero-sale-circle {
+    position: absolute;
+
+    top: 5px;
+    right: 15px;
+
+    width: 95px;
+    height: 95px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 4;
+
+    color: #ffffff;
+    background: #111;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.2);
+
+    transform: rotate(8deg);
+}
+
+.hero-sale-circle span {
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+}
+
+.hero-sale-circle strong {
+    font-size: 1.6rem;
+    line-height: 1;
+}
+
+.hero-sale-circle small {
+    font-size: 0.6rem;
+}
+
+
+/* =========================================
+   FLOATING CARDS
+========================================= */
+
+.hero-floating-card {
+    position: absolute;
+
+    z-index: 5;
+
+    display: flex;
+    align-items: center;
+
+    gap: 0.6rem;
+
+    padding: 0.7rem 0.9rem;
+
+    background: rgba(255, 255, 255, 0.95);
+
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.hero-floating-card > span {
+    font-size: 1.2rem;
+}
+
+.hero-floating-card div {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-floating-card strong {
+    color: #222;
+
+    font-size: 0.7rem;
+}
+
+.hero-floating-card small {
+    color: #999;
+
+    font-size: 0.6rem;
+}
+
+.hero-card-one {
+    left: 0;
+    bottom: 35px;
+}
+
+.hero-card-two {
+    right: -5px;
+    bottom: 15px;
+}
+
+
+/* =========================================
+   DECORATIONS
+========================================= */
+
+.hero-decoration {
+    position: absolute;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+.hero-decoration-one {
+    width: 180px;
+    height: 180px;
+
+    top: -90px;
+    left: 35%;
+
+    background: rgba(240, 240, 240, 0.6);
+}
+
+.hero-decoration-two {
+    width: 100px;
+    height: 100px;
+
+    bottom: -50px;
+    right: 30%;
+
+    background: rgba(230, 230, 230, 0.6);
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 992px) {
+
+    .product-category-hero {
+        padding: 2.5rem;
+
+        gap: 1.5rem;
+    }
+
+    .product-category-hero-content {
+        width: 60%;
+    }
+
+    .product-category-hero-visual {
+        width: 40%;
+    }
+
+    .hero-product-visual {
+        width: 210px;
+        height: 210px;
+    }
+
+    .hero-product-circle {
+        width: 165px;
+        height: 165px;
+    }
+
+    .hero-floating-card {
+        display: none;
+    }
+
+    .hero-sale-circle {
+        right: 0;
+    }
+
+    .hero-brands strong:nth-child(n + 4) {
+        display: none;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .product-category-hero {
+        min-height: auto;
+
+        flex-direction: column;
+        align-items: flex-start;
+
+        padding: 2rem 1.5rem;
+
+        border-radius: 18px;
+    }
+
+    .product-category-hero-content {
+        width: 100%;
+    }
+
+    .product-category-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .category-hero-description {
+        font-size: 0.9rem;
+    }
+
+    .product-category-hero-visual {
+        width: 100%;
+
+        min-height: 230px;
+
+        margin-top: 1rem;
+    }
+
+    .hero-product-visual {
+        width: 190px;
+        height: 190px;
+    }
+
+    .hero-product-circle {
+        width: 145px;
+        height: 145px;
+    }
+
+    .hero-product-content strong {
+        font-size: 1.3rem;
+    }
+
+    .hero-sale-circle {
+        top: 0;
+        right: 20%;
+    }
+
+    .hero-card-one,
+    .hero-card-two {
+        display: none;
+    }
+
+    .hero-brand-section {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 0.7rem;
+    }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+    .product-category-hero {
+        padding: 1.5rem 1rem;
+    }
+
+    .product-category-hero h1 {
+        font-size: 2rem;
+    }
+
+    .products-eyebrow {
+        font-size: 0.68rem;
+    }
+
+    .season-sale-badge {
+        gap: 0.5rem;
+
+        padding: 0.5rem 0.7rem;
+    }
+
+    .category-hero-actions {
+        width: 100%;
+
+        justify-content: space-between;
+    }
+
+    .hero-shop-btn {
+        padding: 0.8rem 1.1rem;
+    }
+
+    .hero-brands {
+        gap: 0.4rem;
+    }
+
+    .hero-brands strong {
+        font-size: 0.65rem;
+    }
+
+    .hero-sale-circle {
+        right: 10%;
+    }
+}

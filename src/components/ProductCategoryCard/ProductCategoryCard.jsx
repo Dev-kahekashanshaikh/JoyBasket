@@ -129,4 +129,4 @@ const ProductCategoryCard = ({
     );
 };
 
-export default ProductCategoryCard;
+export default ProductCategoryCard; 

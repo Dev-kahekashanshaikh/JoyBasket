@@ -1,162 +1,549 @@
+/* =========================================
+   NAVBAR
+========================================= */
+
 .header {
     width: 100%;
-    background-color: var(--white);
-    border-bottom: 1px solid var(--gray-200);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+
+    position: relative;
+    z-index: 100;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #eeeeee;
 }
+
+
+/* =========================================
+   NAVBAR CONTAINER
+========================================= */
 
 .navbar {
     min-height: 72px;
+
     display: flex;
     align-items: center;
-    justify-content: space-between;
+
     gap: 2rem;
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.logo {
+    flex-shrink: 0;
 }
 
 .logo a {
-    color: var(--primary-color);
-    font-size: var(--fs-2xl);
-    font-weight: var(--fw-bold);
-    letter-spacing: -0.5px;
+    color: #171717;
+
+    text-decoration: none;
+
+    font-size: 1.65rem;
+    font-weight: 800;
+
+    letter-spacing: -0.04em;
+
+    transition: color 0.2s ease;
+}
+.logo img {
+    color: #171717;
+
+    text-decoration: none;
+
+    font-size: 1.65rem;
+    font-weight: 800;
+
+    letter-spacing: -0.04em;
+
+    transition: color 0.2s ease;
+    height: 80px;
+    width: 150px;
 }
 
-.nav-links {
+.logo a:hover {
+    color: var(--primary-color);
+}
+
+
+/* =========================================
+   SEARCH
+========================================= */
+
+.navbar-search {
+    flex: 1;
+
+    max-width: 650px;
+
+    height: 44px;
+
     display: flex;
     align-items: center;
-    gap: 2rem;
+
+    margin: 0 auto;
+
+    padding: 0 1rem;
+
+    background: #f7f8f8;
+
+    border: 1px solid #e3e7e5;
+    border-radius: 10px;
+
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-.nav-link {
-    position: relative;
-    color: var(--black);
-    font-size: var(--fs-md);
-    font-weight: var(--fw-medium);
-    transition: var(--transition);
+.navbar-search:focus-within {
+    background: #ffffff;
+
+    border-color: var(--primary-color);
+
+    box-shadow:
+        0 0 0 3px rgba(32, 200, 121, 0.1);
 }
 
-.nav-link:hover {
-    color: var(--primary-color);
+
+/* =========================================
+   SEARCH ICON
+========================================= */
+
+.search-icon {
+    flex-shrink: 0;
+
+    width: 20px;
+    height: 20px;
+
+    margin-right: 0.65rem;
+
+    color: #777;
 }
 
-.nav-link.active {
-    color: var(--primary-color);
-}
 
-.nav-link.active::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -8px;
+/* =========================================
+   SEARCH INPUT
+========================================= */
+
+.navbar-search input {
     width: 100%;
-    height: 2px;
-    background-color: var(--primary-color);
-    border-radius: 2px;
+    height: 100%;
+
+    padding: 0;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #222;
+
+    font-family: inherit;
+    font-size: 0.95rem;
 }
+
+.navbar-search input::placeholder {
+    color: #999;
+}
+
+
+/* Remove browser search clear button */
+
+.navbar-search input::-webkit-search-cancel-button {
+    cursor: pointer;
+}
+
+
+/* =========================================
+   NAV ACTIONS
+========================================= */
 
 .nav-actions {
+    flex-shrink: 0;
+
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+
+    gap: 0.35rem;
 }
 
-.nav-btn {
-    width: 40px;
-    height: 40px;
 
-    display: inline-flex;
+/* =========================================
+   ACTION BUTTON
+========================================= */
+
+.nav-btn {
+    position: relative;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
     align-items: center;
     justify-content: center;
 
-    color: var(--black);
+    border: none;
+    border-radius: 9px;
+
+    background: transparent;
+
+    color: #333;
+
     font-size: 1.35rem;
 
-    border-radius: 50%;
+    text-decoration: none;
 
-    transition: var(--transition);
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        transform 0.2s ease;
 }
 
 .nav-btn:hover {
+    background: #f2f8f5;
+
     color: var(--primary-color);
-    background-color: var(--gray-100);
+
+    transform: translateY(-1px);
 }
 
-.nav-btn:focus-visible,
-.nav-link:focus-visible,
-.logo a:focus-visible {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 4px;
+.nav-btn:active {
+    transform: translateY(0);
 }
+
+
+/* =========================================
+   CART / WISHLIST COUNT BUTTON
+========================================= */
+
+.nav-count-btn {
+    position: relative;
+}
+
+
+/* =========================================
+   COUNT BADGE
+========================================= */
+
+.nav-count {
+    position: absolute;
+
+    top: 2px;
+    right: 1px;
+
+    min-width: 18px;
+    height: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 4px;
+
+    border-radius: 999px;
+
+    background: #20c879;
+
+    color: #ffffff;
+
+    font-size: 0.65rem;
+    font-weight: 700;
+
+    line-height: 1;
+
+    border: 2px solid #ffffff;
+}
+
+
+/* =========================================
+   ACCOUNT
+========================================= */
+
+.account-btn {
+    margin-left: 0.15rem;
+}
+
+
+/* =========================================
+   MOBILE MENU BUTTON
+========================================= */
+
 .menu-toggle {
     display: none;
 
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
 
     align-items: center;
     justify-content: center;
 
-    color: var(--black);
-    font-size: 1.5rem;
+    border: none;
+    border-radius: 9px;
 
-    border-radius: 50%;
+    background: transparent;
 
-    transition: var(--transition);
+    color: #333;
+
+    font-size: 1.45rem;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
 }
 
 .menu-toggle:hover {
+    background: #f2f8f5;
+
     color: var(--primary-color);
-    background-color: var(--gray-100);
 }
+
+
+/* =========================================
+   MOBILE MENU
+========================================= */
+
+.mobile-menu {
+    display: none;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .navbar {
+        gap: 1.2rem;
+    }
+
+    .navbar-search {
+        max-width: 500px;
+    }
+
+    .logo a {
+        font-size: 1.5rem;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
 @media (max-width: 768px) {
 
     .navbar {
         min-height: 64px;
+
+        gap: 0.7rem;
     }
 
-    .nav-links {
-        position: absolute;
 
-        top: 100%;
-        left: 0;
+    /* Logo */
 
-        width: 100%;
-
-        padding: 1.5rem;
-
-        display: none;
-        flex-direction: column;
-        align-items: flex-start;
-
-        gap: 1.25rem;
-
-        background-color: var(--white);
-
-        border-bottom: 1px solid var(--gray-200);
-
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    .logo a {
+        font-size: 1.4rem;
     }
 
-    .nav-links-open {
-        display: flex;
+
+    /* Search */
+
+    .navbar-search {
+        height: 40px;
+
+        min-width: 0;
+
+        padding: 0 0.75rem;
+
+        border-radius: 9px;
     }
 
-    .nav-link.active::after {
-        display: none;
+    .navbar-search input {
+        font-size: 0.85rem;
     }
+
+    .search-icon {
+        width: 18px;
+        height: 18px;
+
+        margin-right: 0.45rem;
+    }
+
+
+    /* Actions */
 
     .nav-actions {
-        margin-left: auto;
+        gap: 0.1rem;
     }
 
-    .search-btn,
+    .nav-btn {
+        width: 38px;
+        height: 38px;
+
+        font-size: 1.2rem;
+    }
+
+
+    /* Keep only important actions */
+
     .account-btn {
         display: none;
     }
 
+
+    /* Mobile menu button */
+
     .menu-toggle {
-        display: inline-flex;
+        display: flex;
+
+        width: 38px;
+        height: 38px;
+    }
+
+
+    /* Mobile menu */
+
+    .mobile-menu {
+        display: flex;
+        flex-direction: column;
+
+        gap: 0.25rem;
+
+        padding: 0.75rem 0 1rem;
+
+        border-top: 1px solid #eeeeee;
+    }
+
+    .mobile-menu a {
+        display: block;
+
+        padding: 0.75rem 0.8rem;
+
+        border-radius: 8px;
+
+        color: #444;
+
+        text-decoration: none;
+
+        font-size: 0.9rem;
+        font-weight: 500;
+
+        transition:
+            background-color 0.2s ease,
+            color 0.2s ease;
+    }
+
+    .mobile-menu a:hover {
+        background: #f2f8f5;
+
+        color: var(--primary-color);
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 520px) {
+
+    .navbar {
+        gap: 0.45rem;
+    }
+
+
+    .logo a {
+        font-size: 1.25rem;
+    }
+
+
+    .navbar-search {
+        height: 38px;
+
+        padding: 0 0.65rem;
+    }
+
+    .navbar-search input {
+        font-size: 0.8rem;
+    }
+
+    .navbar-search input::placeholder {
+        font-size: 0.78rem;
+    }
+
+
+    .nav-btn {
+        width: 35px;
+        height: 35px;
+
+        font-size: 1.1rem;
+    }
+
+    .menu-toggle {
+        width: 35px;
+        height: 35px;
+
+        font-size: 1.25rem;
+    }
+
+
+    .nav-count {
+        top: 0;
+        right: -1px;
+
+        min-width: 16px;
+        height: 16px;
+
+        padding: 0 3px;
+
+        font-size: 0.58rem;
+
+        border-width: 1.5px;
+    }
+
+}
+
+
+/* =========================================
+   VERY SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+
+    .logo a {
+        font-size: 1.1rem;
+    }
+
+    .navbar {
+        gap: 0.3rem;
+    }
+
+    .navbar-search {
+        height: 36px;
+    }
+
+    .navbar-search input {
+        font-size: 0.75rem;
+    }
+
+    .search-icon {
+        width: 16px;
+        height: 16px;
+    }
+
+    .nav-btn,
+    .menu-toggle {
+        width: 33px;
+        height: 33px;
     }
 
 }

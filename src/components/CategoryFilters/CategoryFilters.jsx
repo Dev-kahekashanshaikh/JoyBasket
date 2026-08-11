@@ -1,212 +1,567 @@
+import "./CategoryFilters.css";
+
 const CategoryFilters = ({
     titles = [],
     brands = [],
-    selectedTitle,
-    selectedBrand,
-    selectedPrice,
-    selectedRating,
-    selectedDiscount,
+
+    selectedTitle = [],
+    selectedBrand = [],
+    selectedPrice = [],
+    selectedRating = [],
+    selectedDiscount = [],
+
     setSelectedTitle,
     setSelectedBrand,
     setSelectedPrice,
     setSelectedRating,
     setSelectedDiscount,
+
     clearFilters,
 }) => {
 
+    // =====================================================
+    // CHECKBOX TOGGLE HELPER
+    // =====================================================
+
+    const toggleValue = (
+        value,
+        selectedValues,
+        setSelectedValues
+    ) => {
+
+        if (selectedValues.includes(value)) {
+
+            // Remove value
+            setSelectedValues(
+                selectedValues.filter(
+                    (item) => item !== value
+                )
+            );
+
+        } else {
+
+            // Add value
+            setSelectedValues([
+                ...selectedValues,
+                value,
+            ]);
+        }
+    };
+
+
     return (
+
         <div className="category-filters">
 
-            {/* Product */}
+            {/* =================================================
+                FILTER HEADER
+            ================================================= */}
 
-            <div className="filter-group">
+            <div className="filters-header">
 
-                <label>
-                    Product
-                </label>
+              
 
-                <select
-                    value={selectedTitle}
-                    onChange={(event) =>
-                        setSelectedTitle(event.target.value)
-                    }
+                <button
+                    type="button"
+                    className="clear-filters"
+                    onClick={clearFilters}
                 >
-
-                    <option value="">
-                        All Products
-                    </option>
-
-                    {titles.map((title) => (
-                        <option
-                            key={title}
-                            value={title}
-                        >
-                            {title}
-                        </option>
-                    ))}
-
-                </select>
+                    Clear All Filters
+                </button>
 
             </div>
 
 
-            {/* Brand */}
+            {/* =================================================
+                PRODUCT
+            ================================================= */}
 
             <div className="filter-group">
 
-                <label>
-                    Brand
-                </label>
+                <div className="filter-group-title">
+                    <span>Product</span>
 
-                <select
-                    value={selectedBrand}
-                    onChange={(event) =>
-                        setSelectedBrand(event.target.value)
-                    }
-                >
+                    <span className="filter-count">
+                        {selectedTitle.length > 0
+                            ? selectedTitle.length
+                            : ""}
+                    </span>
+                </div>
 
-                    <option value="">
-                        All Brands
-                    </option>
 
-                    {brands.map((brand) => (
-                        <option
-                            key={brand}
-                            value={brand}
-                        >
-                            {brand}
-                        </option>
-                    ))}
+                <div className="filter-options">
 
-                </select>
+                    {titles.length > 0 ? (
+
+                        titles.map((title) => (
+
+                            <label
+                                className="filter-checkbox"
+                                key={title}
+                            >
+
+                                <input
+                                    type="checkbox"
+                                    checked={selectedTitle.includes(
+                                        title
+                                    )}
+                                    onChange={() =>
+                                        toggleValue(
+                                            title,
+                                            selectedTitle,
+                                            setSelectedTitle
+                                        )
+                                    }
+                                />
+
+                             
+
+                                <span className="filter-label">
+                                    {title}
+                                </span>
+
+                            </label>
+
+                        ))
+
+                    ) : (
+
+                        <span className="filter-empty">
+                            No products available
+                        </span>
+
+                    )}
+
+                </div>
 
             </div>
 
 
-            {/* Price */}
+            {/* =================================================
+                BRAND
+            ================================================= */}
 
             <div className="filter-group">
 
-                <label>
-                    Price
-                </label>
+                <div className="filter-group-title">
 
-                <select
-                    value={selectedPrice}
-                    onChange={(event) =>
-                        setSelectedPrice(event.target.value)
-                    }
-                >
+                    <span>
+                        Brand
+                    </span>
 
-                    <option value="">
-                        All Prices
-                    </option>
+                    <span className="filter-count">
+                        {selectedBrand.length > 0
+                            ? selectedBrand.length
+                            : ""}
+                    </span>
 
-                    <option value="under-50">
-                        Under $50
-                    </option>
+                </div>
 
-                    <option value="50-100">
-                        $50 - $100
-                    </option>
 
-                    <option value="100-500">
-                        $100 - $500
-                    </option>
+                <div className="filter-options">
 
-                    <option value="above-500">
-                        Above $500
-                    </option>
+                    {brands.length > 0 ? (
 
-                </select>
+                        brands.map((brand) => (
+
+                            <label
+                                className="filter-checkbox"
+                                key={brand}
+                            >
+
+                                <input
+                                    type="checkbox"
+                                    checked={selectedBrand.includes(
+                                        brand
+                                    )}
+                                    onChange={() =>
+                                        toggleValue(
+                                            brand,
+                                            selectedBrand,
+                                            setSelectedBrand
+                                        )
+                                    }
+                                />
+
+                           
+
+                                <span className="filter-label">
+                                    {brand}
+                                </span>
+
+                            </label>
+
+                        ))
+
+                    ) : (
+
+                        <span className="filter-empty">
+                            No brands available
+                        </span>
+
+                    )}
+
+                </div>
 
             </div>
 
 
-            {/* Rating */}
+            {/* =================================================
+                PRICE
+            ================================================= */}
 
             <div className="filter-group">
 
-                <label>
-                    Rating
-                </label>
+                <div className="filter-group-title">
+                    <span>
+                        Price
+                    </span>
 
-                <select
-                    value={selectedRating}
-                    onChange={(event) =>
-                        setSelectedRating(event.target.value)
-                    }
-                >
+                    <span className="filter-count">
+                        {selectedPrice.length > 0
+                            ? selectedPrice.length
+                            : ""}
+                    </span>
+                </div>
 
-                    <option value="">
-                        All Ratings
-                    </option>
 
-                    <option value="4">
-                        4★ & above
-                    </option>
+                <div className="filter-options">
 
-                    <option value="3">
-                        3★ & above
-                    </option>
+                    <label className="filter-checkbox">
 
-                    <option value="2">
-                        2★ & above
-                    </option>
+                        <input
+                            type="checkbox"
+                            checked={selectedPrice.includes(
+                                "under-50"
+                            )}
+                            onChange={() =>
+                                toggleValue(
+                                    "under-50",
+                                    selectedPrice,
+                                    setSelectedPrice
+                                )
+                            }
+                        />
 
-                </select>
+                   
+
+                        <span className="filter-label">
+                            Under $50
+                        </span>
+
+                    </label>
+
+
+                    <label className="filter-checkbox">
+
+                        <input
+                            type="checkbox"
+                            checked={selectedPrice.includes(
+                                "50-100"
+                            )}
+                            onChange={() =>
+                                toggleValue(
+                                    "50-100",
+                                    selectedPrice,
+                                    setSelectedPrice
+                                )
+                            }
+                        />
+
+                      
+
+                        <span className="filter-label">
+                            $50 - $100
+                        </span>
+
+                    </label>
+
+
+                    <label className="filter-checkbox">
+
+                        <input
+                            type="checkbox"
+                            checked={selectedPrice.includes(
+                                "100-500"
+                            )}
+                            onChange={() =>
+                                toggleValue(
+                                    "100-500",
+                                    selectedPrice,
+                                    setSelectedPrice
+                                )
+                            }
+                        />
+
+                     
+
+                        <span className="filter-label">
+                            $100 - $500
+                        </span>
+
+                    </label>
+
+
+                    <label className="filter-checkbox">
+
+                        <input
+                            type="checkbox"
+                            checked={selectedPrice.includes(
+                                "above-500"
+                            )}
+                            onChange={() =>
+                                toggleValue(
+                                    "above-500",
+                                    selectedPrice,
+                                    setSelectedPrice
+                                )
+                            }
+                        />
+
+                     
+
+                        <span className="filter-label">
+                            Above $500
+                        </span>
+
+                    </label>
+
+                </div>
 
             </div>
 
 
-            {/* Discount */}
+            {/* =================================================
+                RATING
+            ================================================= */}
 
             <div className="filter-group">
 
-                <label>
-                    Discount
-                </label>
+                <div className="filter-group-title">
 
-                <select
-                    value={selectedDiscount}
-                    onChange={(event) =>
-                        setSelectedDiscount(event.target.value)
-                    }
-                >
+                    <span>
+                        Rating
+                    </span>
 
-                    <option value="">
-                        All Discounts
-                    </option>
+                    <span className="filter-count">
+                        {selectedRating.length > 0
+                            ? selectedRating.length
+                            : ""}
+                    </span>
 
-                    <option value="10">
-                        10% & above
-                    </option>
+                </div>
 
-                    <option value="20">
-                        20% & above
-                    </option>
 
-                    <option value="30">
-                        30% & above
-                    </option>
+                <div className="filter-options">
 
-                </select>
+                    <label className="filter-checkbox">
+
+                        <input
+                            type="checkbox"
+                            checked={selectedRating.includes("4")}
+                            onChange={() =>
+                                toggleValue(
+                                    "4",
+                                    selectedRating,
+                                    setSelectedRating
+                                )
+                            }
+                        />
+
+                     
+
+                        <span className="filter-label">
+                            <span className="rating-stars">
+                                ★★★★★
+                            </span>
+
+                            <span>
+                                4 & above
+                            </span>
+                        </span>
+
+                    </label>
+
+
+                    <label className="filter-checkbox">
+
+                        <input
+                            type="checkbox"
+                            checked={selectedRating.includes("3")}
+                            onChange={() =>
+                                toggleValue(
+                                    "3",
+                                    selectedRating,
+                                    setSelectedRating
+                                )
+                            }
+                        />
+
+                    
+
+                        <span className="filter-label">
+                            <span className="rating-stars">
+                                ★★★★
+                            </span>
+
+                            <span>
+                                3 & above
+                            </span>
+                        </span>
+
+                    </label>
+
+
+                    <label className="filter-checkbox">
+
+                        <input
+                            type="checkbox"
+                            checked={selectedRating.includes("2")}
+                            onChange={() =>
+                                toggleValue(
+                                    "2",
+                                    selectedRating,
+                                    setSelectedRating
+                                )
+                            }
+                        />
+
+                     
+
+                        <span className="filter-label">
+                            <span className="rating-stars">
+                                ★★★
+                            </span>
+
+                            <span>
+                                2 & above
+                            </span>
+                        </span>
+
+                    </label>
+
+                </div>
 
             </div>
 
 
-            {/* Clear Filters */}
+            {/* =================================================
+                DISCOUNT
+            ================================================= */}
+
+            <div className="filter-group">
+
+                <div className="filter-group-title">
+
+                    <span>
+                        Discount
+                    </span>
+
+                    <span className="filter-count">
+                        {selectedDiscount.length > 0
+                            ? selectedDiscount.length
+                            : ""}
+                    </span>
+
+                </div>
+
+
+                <div className="filter-options">
+
+                    <label className="filter-checkbox">
+
+                        <input
+                            type="checkbox"
+                            checked={selectedDiscount.includes(
+                                "10"
+                            )}
+                            onChange={() =>
+                                toggleValue(
+                                    "10",
+                                    selectedDiscount,
+                                    setSelectedDiscount
+                                )
+                            }
+                        />
+
+                    
+
+                        <span className="filter-label">
+                            10% & above
+                        </span>
+
+                    </label>
+
+
+                    <label className="filter-checkbox">
+
+                        <input
+                            type="checkbox"
+                            checked={selectedDiscount.includes(
+                                "20"
+                            )}
+                            onChange={() =>
+                                toggleValue(
+                                    "20",
+                                    selectedDiscount,
+                                    setSelectedDiscount
+                                )
+                            }
+                        />
+
+                     
+
+                        <span className="filter-label">
+                            20% & above
+                        </span>
+
+                    </label>
+
+
+                    <label className="filter-checkbox">
+
+                        <input
+                            type="checkbox"
+                            checked={selectedDiscount.includes(
+                                "30"
+                            )}
+                            onChange={() =>
+                                toggleValue(
+                                    "30",
+                                    selectedDiscount,
+                                    setSelectedDiscount
+                                )
+                            }
+                        />
+
+                       
+
+                        <span className="filter-label">
+                            30% & above
+                        </span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            {/* =================================================
+                BOTTOM CLEAR BUTTON
+            ================================================= */}
 
             <button
                 type="button"
                 className="clear-filters"
                 onClick={clearFilters}
             >
-                Clear Filters
+                Clear All Filters
             </button>
 
         </div>
     );
 };
+
 
 export default CategoryFilters;

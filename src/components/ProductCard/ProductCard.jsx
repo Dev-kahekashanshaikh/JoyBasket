@@ -1,75 +1,191 @@
-import { HiOutlineHeart, HiOutlineShoppingCart } from "react-icons/hi2";
+import { useWishlist } from "../../context/WishlistContext";
 
 import "./ProductCard.css";
 
-const ProductCard = ({ product }) => {
-    const discount = Math.round(product.discountPercentage);
+const ProductCard = ({
+    product,
+    onClick,
+}) => {
+
+    const {
+        toggleWishlist,
+        isInWishlist,
+    } = useWishlist();
+
+
+    // =========================================
+    // DISCOUNT
+    // =========================================
+
+    const discount = Math.round(
+        product.discountPercentage || 0
+    );
+
+
+    // =========================================
+    // WISHLIST
+    // =========================================
+
+    const handleWishlist = (event) => {
+
+        // Prevent product card click
+        event.stopPropagation();
+
+        toggleWishlist(product);
+    };
+
+
+    // =========================================
+    // OLD PRICE
+    // =========================================
+
+    const originalPrice =
+        product.discountPercentage > 0
+            ? product.price /
+              (1 - product.discountPercentage / 100)
+            : product.price;
+
 
     return (
-        <article className="product-card">
+
+        <article
+            className="product-card"
+            onClick={onClick}
+        >
+
+            {/* =================================
+                DISCOUNT
+            ================================= */}
+
+            {discount > 0 && (
+
+                <div className="product-discount">
+
+                    -{discount}%
+
+                </div>
+
+            )}
+
+
+            {/* =================================
+                WISHLIST
+            ================================= */}
+
+            <button
+                type="button"
+                className={`product-wishlist ${
+                    isInWishlist(product.id)
+                        ? "active"
+                        : ""
+                }`}
+                aria-label={
+                    isInWishlist(product.id)
+                        ? `Remove ${product.title} from wishlist`
+                        : `Add ${product.title} to wishlist`
+                }
+                onClick={handleWishlist}
+            >
+
+                {isInWishlist(product.id)
+                    ? "♥"
+                    : "♡"
+                }
+
+            </button>
+
+
+            {/* =================================
+                IMAGE
+            ================================= */}
 
             <div className="product-card-image">
 
                 <img
                     src={product.thumbnail}
                     alt={product.title}
+                    loading="lazy"
                 />
-
-                <span className="product-discount">
-                    -{discount}%
-                </span>
-
-                <button
-                    type="button"
-                    className="product-wishlist"
-                    aria-label={`Add ${product.title} to wishlist`}
-                >
-                    <HiOutlineHeart />
-                </button>
 
             </div>
 
-            <div className="product-card-content">
 
-                <span className="product-category">
+            {/* =================================
+                INFORMATION
+            ================================= */}
+
+            <div className="product-card-info">
+
+                {/* Category */}
+
+                <span className="product-card-category">
+
                     {product.category}
+
                 </span>
 
-                <h3 className="product-title">
+
+                {/* Product Name */}
+
+                <h3 title={product.title}>
+
                     {product.title}
+
                 </h3>
 
-                <div className="product-rating">
-                    <span>★</span>
-                    <span>{product.rating}</span>
-                </div>
 
-                <div className="product-price">
-                    <span className="product-current-price">
-                        ${product.price}
+                {/* Rating */}
+
+                <div className="product-card-rating">
+
+                    <span>
+                        ★
                     </span>
 
-                    <span className="product-original-price">
+                    <strong>
+                        {Number(product.rating || 0).toFixed(1)}
+                    </strong>
+
+                </div>
+
+
+                {/* Price */}
+
+                <div className="product-card-price">
+
+                    <strong>
                         $
-                        {(
-                            product.price /
-                            (1 - product.discountPercentage / 100)
-                        ).toFixed(2)}
-                    </span>
+                        {Number(product.price || 0).toFixed(2)}
+                    </strong>
+
+
+                    {discount > 0 && (
+
+                        <del>
+                            $
+                            {Number(
+                                originalPrice
+                            ).toFixed(2)}
+                        </del>
+
+                    )}
+
                 </div>
 
-                <button
-                    type="button"
-                    className="btn btn-primary product-cart-btn"
-                >
-                    <HiOutlineShoppingCart />
-                    Add to Cart
-                </button>
+
+                {/* View Details */}
+
+                <span className="view-product">
+
+                    View Details →
+
+                </span>
 
             </div>
 
         </article>
     );
 };
+
 
 export default ProductCard;

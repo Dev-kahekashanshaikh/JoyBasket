@@ -1,29 +1,43 @@
 import ProductCard from "../ProductCard/ProductCard";
 
-const ProductGrid = ({ products = [] }) => {
+import "./ProductGrid.css";
 
-    if (products.length === 0) {
+
+const ProductGrid = ({
+    products = [],
+    onProductClick,
+}) => {
+
+    if (!products.length) {
+
         return (
             <div className="no-products">
-                <p>
-                    No products found for this category.
-                </p>
+                No products found.
             </div>
         );
     }
 
+
     return (
+
         <div className="category-products-grid">
 
             {products.map((product) => (
+
                 <ProductCard
                     key={product.id}
                     product={product}
+                    onClick={() =>
+                        onProductClick(product)
+                    }
                 />
+
             ))}
 
         </div>
+
     );
 };
+
 
 export default ProductGrid;

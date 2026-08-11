@@ -1,42 +1,71 @@
-/* =========================================
-   Category Banners
-========================================= */
+/* =========================================================
+   CATEGORY BANNERS
+   JOYBASKET - CLEAN PROFESSIONAL THEME
+========================================================= */
 
 .category-banners {
     padding: 3rem 0;
 }
 
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
 .category-banners-heading {
     margin-bottom: 1.5rem;
 }
 
+
 .category-banners-heading h2 {
     margin: 0;
 
-    color: var(--black);
+    color: #172033;
 
     font-size: var(--fs-2xl);
     font-weight: var(--fw-bold);
+
+    line-height: 1.2;
 }
 
 
-/* =========================================
-   Grid
-========================================= */
+/* Small green accent under heading */
+
+.category-banners-heading h2::after {
+    content: "";
+
+    display: block;
+
+    width: 42px;
+    height: 3px;
+
+    margin-top: 0.55rem;
+
+    background: #22c55e;
+
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
 
 .category-banners-grid {
     display: grid;
 
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
 
-    gap: 3.5rem;
+    gap: 2rem;
 
+    width: 100%;
 }
 
 
-/* =========================================
-   Banner
-========================================= */
+/* =========================================================
+   BANNER CARD
+========================================================= */
 
 .category-banner {
     position: relative;
@@ -45,186 +74,352 @@
 
     overflow: hidden;
 
-    border-radius: var(--radius-lg);
+    background: #ffffff;
 
-    /* background-color: var(--gray-200); */
+    border: 1px solid #e5e7eb;
+
+    border-radius: var(--radius-lg);
 
     cursor: pointer;
 
+    box-sizing: border-box;
+
+    box-shadow:
+        0 6px 20px rgba(15, 23, 42, 0.07);
+
     transition:
         transform 0.3s ease,
-        box-shadow 0.3s ease;
-        /* border: 2px solid black; */
-
-        /* background: transparent; */
-
-
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
 }
+
+
+/* =========================================================
+   BANNER HOVER
+========================================================= */
 
 .category-banner:hover {
-    transform: translateY(-4px);
+    transform: translateY(-6px);
 
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    border-color: #bbf7d0;
+
+    box-shadow:
+        0 16px 35px rgba(15, 23, 42, 0.11),
+        0 4px 12px rgba(34, 197, 94, 0.08);
 }
 
 
-/* =========================================
-   Image
-========================================= */
+/* =========================================================
+   IMAGE
+========================================================= */
 
 .category-banner img {
     position: absolute;
-    /* right: 10%; */
-/* border: 2px solid black; */
+
+    inset: 0;
+
     width: 100%;
     height: 100%;
+
     object-fit: contain;
-    /* object-position: right; */
-    
-    transition: transform 0.5s ease;
+
+    object-position: center;
+
+    padding: 0.75rem;
+
+    box-sizing: border-box;
+
+    opacity: 1;
+
+    transition:
+        transform 0.5s ease;
 }
 
+
+/* =========================================================
+   IMAGE HOVER
+========================================================= */
 
 .category-banner:hover .category-banner-image {
     transform: scale(1.06);
 }
 
 
-/* =========================================
-   Overlay
-========================================= */
+/* =========================================================
+   IMAGE BACKGROUND
+========================================================= */
+
+.category-banner::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: #f8fafc;
+
+    z-index: 0;
+}
+
+
+/*
+   Keep image above background
+*/
+
+.category-banner img {
+    z-index: 1;
+}
+
+
+/* =========================================================
+   OVERLAY
+   VERY LIGHT - NOT DARK
+========================================================= */
 
 .category-banner-overlay {
     position: absolute;
 
     inset: 0;
 
+    z-index: 1;
+
     background: linear-gradient(
         to top,
-        rgba(0, 0, 0, 0.8),
-        rgba(0, 0, 0, 0.35),
-        rgba(0, 0, 0, 0.05)
+        rgba(255, 255, 255, 0.96) 0%,
+        rgba(255, 255, 255, 0.82) 35%,
+        rgba(255, 255, 255, 0.05) 75%
     );
+
+    pointer-events: none;
 }
 
 
-/* =========================================
-   Content
-========================================= */
+/* =========================================================
+   CONTENT
+========================================================= */
 
 .category-banner-content {
     position: absolute;
 
-    left: 1.5rem;
-    right: 1.5rem;
-    bottom: 3.5rem;
+    left: 1.25rem;
+    right: 1.25rem;
+    bottom: 1.1rem;
 
     z-index: 2;
 
-    color: var(--black);
+    color: #172033;
+
     font-weight: var(--fw-bold);
 }
 
 
-/* Category */
+/* =========================================================
+   CATEGORY
+========================================================= */
 
 .category-banner-category {
     display: block;
 
     margin-bottom: 0.35rem;
 
+    color: #16a34a;
+
     font-size: var(--fs-sm);
+
     font-weight: var(--fw-semibold);
 
     text-transform: capitalize;
+
+    letter-spacing: 0.4px;
 }
 
 
-/* Product title */
+/* =========================================================
+   PRODUCT TITLE
+========================================================= */
 
 .category-banner-content h3 {
     margin: 0 0 0.4rem;
 
-    color:var(--black);
-    /* text-decoration: underline; */
-    text-transform:capitalize;
-    
-    background-color: whitesmoke;
-    font-size: var(--fs-xl);
+    color: #172033;
+
+    background: transparent;
+
+    font-size: var(--fs-md);
+
     font-weight: var(--fw-bold);
 
     line-height: 1.2;
 
+    text-transform: capitalize;
+
     display: -webkit-box;
+
     -webkit-line-clamp: 2;
+
     -webkit-box-orient: vertical;
 
     overflow: hidden;
+
+    transition: color 0.25s ease;
 }
 
 
-/* Brand */
+/* =========================================================
+   TITLE HOVER
+========================================================= */
+
+.category-banner:hover
+.category-banner-content h3 {
+    color: #15803d;
+}
+
+
+/* =========================================================
+   CATEGORY NAME
+========================================================= */
+
+.category-banner-content .category-name {
+    color: #334155;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
 
 .category-banner-brand {
-    margin: 0 0 0.8rem;
+    margin: 0 0 0.65rem;
 
-    color: rgba(255, 255, 255, 0.85);
+    color: #64748b;
 
     font-size: var(--fs-sm);
+
+    font-weight: var(--fw-medium);
 }
 
 
-/* =========================================
-   Price + Discount
-========================================= */
+/* =========================================================
+   BOTTOM TEXT
+========================================================= */
+
+.category-banner-bottom {
+    color: #16a34a;
+
+    font-size: var(--fs-md);
+
+    font-weight: var(--fw-semibold);
+}
+
+
+/* =========================================================
+   PRICE + DISCOUNT
+========================================================= */
 
 .category-banner-details {
     display: flex;
 
     align-items: center;
+
     justify-content: space-between;
 
     gap: 1rem;
 }
 
+
+/* =========================================================
+   PRICE
+========================================================= */
+
 .category-banner-price {
+    color: #15803d;
+
     font-size: var(--fs-md);
-    font-weight: var(--fw-semibold);
 
-    white-space: nowrap;
-}
-
-.category-banner-discount {
-    padding: 0.3rem 0.6rem;
-
-    border-radius: var(--radius-sm);
-
-    color: var(--white);
-    background-color: var(--primary-color);
-
-    font-size: var(--fs-xs);
     font-weight: var(--fw-bold);
 
     white-space: nowrap;
 }
 
 
-/* =========================================
-   Tablet
-========================================= */
+/* =========================================================
+   DISCOUNT
+========================================================= */
 
-@media (max-width: 992px) {
+.category-banner-discount {
+    display: inline-flex;
 
-    .category-banners-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    align-items: center;
 
+    justify-content: center;
+
+    padding: 0.35rem 0.65rem;
+
+    border-radius: var(--radius-sm);
+
+    color: #ffffff;
+
+    background: #22c55e;
+
+    border: 1px solid #22c55e;
+
+    font-size: var(--fs-xs);
+
+    font-weight: var(--fw-bold);
+
+    white-space: nowrap;
+
+    box-shadow:
+        0 4px 10px rgba(34, 197, 94, 0.18);
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
 }
 
 
-/* =========================================
-   Mobile
-========================================= */
+/* =========================================================
+   DISCOUNT HOVER
+========================================================= */
+
+.category-banner:hover
+.category-banner-discount {
+    background: #16a34a;
+
+    border-color: #16a34a;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 992px) {
+
+    .category-banners {
+        padding: 2.75rem 0;
+    }
+
+
+    .category-banners-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 1.5rem;
+    }
+
+
+    .category-banner {
+        height: 280px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media (max-width: 576px) {
 
@@ -232,18 +427,85 @@
         padding: 2.5rem 0;
     }
 
+
+    .category-banners-heading {
+        margin-bottom: 1.25rem;
+    }
+
+
     .category-banners-heading h2 {
         font-size: var(--fs-xl);
     }
 
+
     .category-banners-grid {
         grid-template-columns: 1fr;
 
-        gap: 1rem;
+        gap: 1.25rem;
     }
+
 
     .category-banner {
         height: 280px;
+
+        border-radius: 15px;
     }
 
+
+    .category-banner-content {
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+    }
+
+
+    .category-banner img {
+        padding: 0.5rem;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .category-banner {
+        height: 260px;
+    }
+
+
+    .category-banner-content {
+        left: 0.85rem;
+        right: 0.85rem;
+        bottom: 0.85rem;
+    }
+
+
+    .category-banner-category {
+        font-size: 0.7rem;
+    }
+
+
+    .category-banner-content h3 {
+        font-size: 0.95rem;
+    }
+
+
+    .category-banner-brand {
+        font-size: 0.75rem;
+    }
+
+
+    .category-banner-price {
+        font-size: 0.9rem;
+    }
+
+
+    .category-banner-discount {
+        padding: 0.3rem 0.5rem;
+
+        font-size: 0.68rem;
+    }
 }

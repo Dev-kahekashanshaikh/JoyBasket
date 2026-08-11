@@ -2,14 +2,26 @@ import { useMemo, useState } from "react";
 
 const useProductFilters = (categoryProducts = []) => {
 
-    const [selectedTitle, setSelectedTitle] = useState("");
-    const [selectedBrand, setSelectedBrand] = useState("");
-    const [selectedPrice, setSelectedPrice] = useState("");
-    const [selectedRating, setSelectedRating] = useState("");
-    const [selectedDiscount, setSelectedDiscount] = useState("");
+    // =========================================================
+    // SELECTED FILTERS
+    // Arrays are required because checkboxes allow multiple
+    // selections at the same time.
+    // =========================================================
+
+    const [selectedTitle, setSelectedTitle] = useState([]);
+
+    const [selectedBrand, setSelectedBrand] = useState([]);
+
+    const [selectedPrice, setSelectedPrice] = useState([]);
+
+    const [selectedRating, setSelectedRating] = useState([]);
+
+    const [selectedDiscount, setSelectedDiscount] = useState([]);
 
 
-    // Available product titles
+    // =========================================================
+    // AVAILABLE PRODUCT TITLES
+    // =========================================================
 
     const titles = useMemo(() => {
 
@@ -24,7 +36,9 @@ const useProductFilters = (categoryProducts = []) => {
     }, [categoryProducts]);
 
 
-    // Available brands
+    // =========================================================
+    // AVAILABLE BRANDS
+    // =========================================================
 
     const brands = useMemo(() => {
 
@@ -39,88 +53,136 @@ const useProductFilters = (categoryProducts = []) => {
     }, [categoryProducts]);
 
 
-    // Apply filters
+    // =========================================================
+    // APPLY FILTERS
+    // =========================================================
 
     const filteredProducts = useMemo(() => {
 
         return categoryProducts.filter((product) => {
 
-            // Product title
+
+            // =================================================
+            // PRODUCT TITLE
+            // =================================================
 
             if (
-                selectedTitle &&
-                product.title !== selectedTitle
+                selectedTitle.length > 0 &&
+                !selectedTitle.includes(product.title)
             ) {
                 return false;
             }
 
 
-            // Brand
+            // =================================================
+            // BRAND
+            // =================================================
 
             if (
-                selectedBrand &&
-                product.brand !== selectedBrand
+                selectedBrand.length > 0 &&
+                !selectedBrand.includes(product.brand)
             ) {
                 return false;
             }
 
 
-            // Price
+            // =================================================
+            // PRICE
+            //
+            // Multiple price ranges:
+            // If ANY selected range matches, product stays.
+            // =================================================
 
-            if (selectedPrice) {
+            if (selectedPrice.length > 0) {
 
-                const price = product.price;
+                const price = Number(product.price);
 
-                if (
-                    selectedPrice === "under-50" &&
-                    price >= 50
-                ) {
+                const priceMatches = selectedPrice.some(
+                    (range) => {
+
+                        switch (range) {
+
+                            case "under-50":
+                                return price < 50;
+
+                            case "50-100":
+                                return price >= 50 && price <= 100;
+
+                            case "100-500":
+                                return price > 100 && price <= 500;
+
+                            case "above-500":
+                                return price > 500;
+
+                            default:
+                                return true;
+                        }
+
+                    }
+                );
+
+
+                if (!priceMatches) {
                     return false;
                 }
 
-                if (
-                    selectedPrice === "50-100" &&
-                    (price < 50 || price > 100)
-                ) {
-                    return false;
-                }
-
-                if (
-                    selectedPrice === "100-500" &&
-                    (price < 100 || price > 500)
-                ) {
-                    return false;
-                }
-
-                if (
-                    selectedPrice === "above-500" &&
-                    price <= 500
-                ) {
-                    return false;
-                }
             }
 
 
-            // Rating
+            // =================================================
+            // RATING
+            //
+            // Example:
+            // Selecting 4★ means products >= 4
+            // =================================================
 
-            if (
-                selectedRating &&
-                product.rating < Number(selectedRating)
-            ) {
-                return false;
+            if (selectedRating.length > 0) {
+
+                const rating = Number(product.rating);
+
+                const ratingMatches = selectedRating.some(
+                    (minimumRating) =>
+                        rating >= Number(minimumRating)
+                );
+
+
+                if (!ratingMatches) {
+                    return false;
+                }
+
             }
 
 
-            // Discount
+            // =================================================
+            // DISCOUNT
+            //
+            // Example:
+            // Selecting 20% means products >= 20%
+            // =================================================
 
-            if (
-                selectedDiscount &&
-                product.discountPercentage <
-                Number(selectedDiscount)
-            ) {
-                return false;
+            if (selectedDiscount.length > 0) {
+
+                const discount = Number(
+                    product.discountPercentage
+                );
+
+                const discountMatches =
+                    selectedDiscount.some(
+                        (minimumDiscount) =>
+                            discount >= Number(minimumDiscount)
+                    );
+
+
+                if (!discountMatches) {
+                    return false;
+                }
+
             }
 
+
+            // =================================================
+            // PRODUCT PASSED ALL FILTERS
+            // =================================================
 
             return true;
 
@@ -128,6 +190,7 @@ const useProductFilters = (categoryProducts = []) => {
 
     }, [
         categoryProducts,
+
         selectedTitle,
         selectedBrand,
         selectedPrice,
@@ -136,20 +199,31 @@ const useProductFilters = (categoryProducts = []) => {
     ]);
 
 
-    // Clear filters
+    // =========================================================
+    // CLEAR ALL FILTERS
+    // =========================================================
 
     const clearFilters = () => {
 
-        setSelectedTitle("");
-        setSelectedBrand("");
-        setSelectedPrice("");
-        setSelectedRating("");
-        setSelectedDiscount("");
+        setSelectedTitle([]);
+
+        setSelectedBrand([]);
+
+        setSelectedPrice([]);
+
+        setSelectedRating([]);
+
+        setSelectedDiscount([]);
 
     };
 
 
+    // =========================================================
+    // RETURN
+    // =========================================================
+
     return {
+
         titles,
         brands,
 
@@ -168,7 +242,9 @@ const useProductFilters = (categoryProducts = []) => {
         filteredProducts,
 
         clearFilters,
+
     };
 };
+
 
 export default useProductFilters;

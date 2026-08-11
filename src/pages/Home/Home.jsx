@@ -2,7 +2,7 @@ import Hero from "../../components/Hero/Hero";
 import CategoryBanners from "../../components/CategoryBanners/CategoryBanners";
 import Categories from "../../components/Categories/Categories";
 import "../../components/Categories/Categories.css";
-
+import Products from "../Products/Products"
 import useProducts from "../../hooks/useProducts";
 
 const Home = () => {
@@ -41,7 +41,8 @@ const Home = () => {
             <CategoryBanners products={products} />
 
             <Categories products={products}  itemNoSlicestart={0} itemNoSliceEnd={18}/>
-
+            
+            <Products></Products>
         </main>
     );
 };

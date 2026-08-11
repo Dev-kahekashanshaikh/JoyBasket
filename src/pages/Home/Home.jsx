@@ -4,6 +4,7 @@ import Categories from "../../components/Categories/Categories";
 import "../../components/Categories/Categories.css";
 import Products from "../Products/Products"
 import useProducts from "../../hooks/useProducts";
+import ProductCategoryHeader from "../../components/ProductCategoryHeader/ProductCategoryHeader"
 
 const Home = () => {
     const {
@@ -41,6 +42,9 @@ const Home = () => {
             <CategoryBanners products={products} />
 
             <Categories products={products}  itemNoSlicestart={0} itemNoSliceEnd={18}/>
+            {/* <ProductCategoryHeader></ProductCategoryHeader> */}
+                        
+
             
             <Products></Products>
         </main>

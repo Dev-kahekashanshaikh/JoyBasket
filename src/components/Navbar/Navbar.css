@@ -4,14 +4,12 @@
 
 .header {
     width: 100%;
-
     position: relative;
     z-index: 100;
-
     background: #ffffff;
-
     border-bottom: 1px solid #eeeeee;
 }
+
 
 
 /* =========================================

@@ -4,7 +4,7 @@
 
 .hero {
     width: 90%;
-    height: 30vh;
+    height: fit-content;
     margin: 0% 5%;
     min-height: 360px;
     max-height: 420px;

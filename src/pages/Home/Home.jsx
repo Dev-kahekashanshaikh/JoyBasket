@@ -41,7 +41,7 @@ const Home = () => {
 
             <CategoryBanners products={products} />
 
-            <Categories products={products}  itemNoSlicestart={0} itemNoSliceEnd={18}/>
+            <Categories products={products}  itemNoSlicestart={0} itemNoSliceEnd={10}/>
             {/* <ProductCategoryHeader></ProductCategoryHeader> */}
                         
 

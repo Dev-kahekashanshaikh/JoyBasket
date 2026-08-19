@@ -15,10 +15,12 @@ import {
     HiOutlineXMark,
 } from "react-icons/hi2";
 
+
 import { useCart } from "../../context/CartContext";
 import { useWishlist } from "../../context/WishlistContext";
 
 import "./Navbar.css";
+
 
 
 const Navbar = () => {
@@ -66,39 +68,15 @@ const Navbar = () => {
     };
 
 
+
+    
+
+
     // =========================================
     // SEARCH
     // =========================================
 
-    // const handleSearch = (event) => {
-
-    //     event.preventDefault();
-
-    //     const search = searchText.trim();
-
-    //     console.log("Search entered:", search);
-
-
-    //     // Don't search empty text
-    //     if (!search) {
-    //         return;
-    //     }
-
-
-    //     // Navigate to products page
-    //     navigate(
-    //         `/products?search=${encodeURIComponent(search)}`
-    //     );
-
-
-    //     // Clear search input
-    //     setSearchText("");
-
-
-    //     // Close mobile menu
-    //     closeMenu();
-
-    // };
+   
 
     const handleSearch = (event) => {
 
@@ -106,15 +84,21 @@ const Navbar = () => {
 
     const search = searchText.trim();
 
+         // Don't search empty text
     if (!search) {
         return;
     }
 
     console.log("Searching product:", search);
 
+
+    // Navigate to products page
     navigate(`/products?search=${encodeURIComponent(search)}`);
 
+     // Clear search input
     setSearchText("");
+
+     // Close mobile menu
     closeMenu();
 
 };
@@ -139,14 +123,17 @@ const Navbar = () => {
 
     return (
 
-        <header className="header">
-
+        <header className="header" >
             <div className="container">
 
                 <nav
                     className="navbar"
                     aria-label="Main navigation"
-                >
+              >
+
+               
+
+                
 
                     {/* =================================
                         LOGO
@@ -348,6 +335,12 @@ const Navbar = () => {
                             onClick={closeMenu}
                         >
                             Contact
+                        </NavLink>
+                        <NavLink
+                            to="/acount"
+                            onClick={closeMenu}
+                        >
+                          <HiOutlineUser />   Acount 
                         </NavLink>
 
                     </div>

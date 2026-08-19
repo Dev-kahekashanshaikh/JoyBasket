@@ -94,6 +94,14 @@
 }
 
 
+
+
+.category-banner-content{
+    visibility: hidden;
+}
+
+
+
 /* =========================================================
    BANNER HOVER
 ========================================================= */
@@ -107,7 +115,9 @@
         0 16px 35px rgba(15, 23, 42, 0.11),
         0 4px 12px rgba(34, 197, 94, 0.08);
 }
-
+ .category-banner:hover .category-banner-content{
+    visibility: visible;
+}
 
 /* =========================================================
    IMAGE

@@ -11,12 +11,18 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
+
 import "./Hero.css";
 
 const Hero = ({ products = [] }) => {
     const navigate = useNavigate();
 
-    const heroProducts = products.slice(0, 6);
+
+    //PRODUCTS ITEMS LIST START AND END 
+
+    const productStrtPoint= 0;
+    const productEndPoint= 5;
+    const heroProducts = products.slice(productStrtPoint, productEndPoint);
 
     const handleBannerClick = (product) => {
         navigate(
